@@ -12,6 +12,8 @@ fi
 MIME=$(file -ib "$1" | cut -d\; -f1)
 
 ## use awk to search /etc/mime.types
+## so clean up MIME
 MIME=$(tr '/' '.' <<< $MIME)
 
-awk "\$1 ~ /^${MIME}\$/ { print \$2 }" /etc/mime.types
+## there should only be one
+awk "\$1 ~ /^${MIME}\$/ { print \$2 }" /etc/mime.types | head -n 1
