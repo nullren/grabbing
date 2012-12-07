@@ -1,6 +1,6 @@
 #!/bin/sh
 
-UPLOADSCRIPT=imgscp
+UPLOADSCRIPT=scpur
 
 ## make temp file
 THING=$(mktemp)
