@@ -3,7 +3,7 @@
 UPLOADSCRIPT=imgscp
 
 ## make temp file
-THING=$(mktemp --suffix=.png)
+THING=$(mktemp)
 chmod +r "${THING}"
 
 ## take screen shot
