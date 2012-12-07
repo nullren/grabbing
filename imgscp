@@ -14,6 +14,7 @@ fi
 
 IMGURL="http://omgren.com/s/${BLAH}.png"
 
+## get the url somewhere
 echo -n $IMGURL | xclip
 echo -n $IMGURL | xclip -selection c
 echo read $IMGURL into xclip
