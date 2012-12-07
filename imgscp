@@ -1,0 +1,21 @@
+#!/bin/sh
+
+[ $# -lt 1 -a ! -f $1 ] && exit 1
+
+THING=$1
+SSHSTR="pompom"
+BLAH=$(sha1sum "${THING}" | awk '{ print $1 }')
+
+if [ -f $THING ]; then
+    scp "${THING}" "${SSHSTR}:scrots/${BLAH}.png"
+fi
+
+[ $? -ne 0 ] && (echo error && exit 1)
+
+IMGURL="http://omgren.com/s/${BLAH}.png"
+
+echo -n $IMGURL | xclip
+echo -n $IMGURL | xclip -selection c
+echo read $IMGURL into xclip
+notify-send -t 500 "$IMGURL"
+#browser "$IMGURL"

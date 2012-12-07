@@ -1,0 +1,14 @@
+#!/bin/sh
+
+GRABDIR=/tmp
+UPLOADSCRIPT=imgscp
+
+COUNT=$(ls "${GRABDIR}"/screengrab-*.png 2>/dev/null | wc -l)
+ID=$(echo $COUNT+1 | bc)
+
+scrot -s "${GRABDIR}/screengrab-${ID}.png"
+
+#[ $# -lt 1 ] && exit 0
+
+echo -n "hold on " | xclip
+$UPLOADSCRIPT "${GRABDIR}/screengrab-${ID}.png" 
