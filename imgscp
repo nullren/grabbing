@@ -5,11 +5,15 @@ if [ "$#" -lt 1 -o ! -f "$1" ]; then
   exit 1
 fi
 
+## take a file and get its sha1 to use as the file name on the remote
+## machine. 
+
+## TODO: find a clever way to make suffixes match
+
 THING="$1"
-SSHSTR="pompom"
 BLAH=$(sha1sum "${THING}" | awk '{ print $1 }')
 
-scp "${THING}" "${SSHSTR}:scrots/${BLAH}.png"
+scp "${THING}" pompom:"scrots/${BLAH}.png"
 
 if [ $? -ne 0 ]; then
   echo error 1>&2
