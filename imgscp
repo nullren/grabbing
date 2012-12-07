@@ -13,16 +13,8 @@ scp "${THING}" "${SSHSTR}:scrots/${BLAH}.png"
 
 if [ $? -ne 0 ]; then
   echo error 1>&2
-  notify-send -t 500 "error uploading image"
   exit 1
 fi
 
 IMGURL="http://omgren.com/s/${BLAH}.png"
-
-## get the url somewhere
-echo -n "$IMGURL" | xclip
-echo -n "$IMGURL" | xclip -selection c
-
-## notify we're done
-echo read "$IMGURL" into xclip
-notify-send -t 500 "$IMGURL"
+echo $IMGURL

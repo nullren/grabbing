@@ -12,4 +12,18 @@ scrot -s "${THING}"
 echo -n "hold on " | xclip
 
 ## upload screen shot
-$UPLOADSCRIPT "${THING}"
+IMGURL=$($UPLOADSCRIPT "${THING}")
+
+if [ $? -ne 0 ]; then
+  echo error uploading to $UPLOADSCRIPT 1>&2
+  notify-send -t 500 "error uploading to $UPLOADSCRIPT"
+  exit 1
+fi
+
+## get the url somewhere
+echo -n "$IMGURL" | xclip
+echo -n "$IMGURL" | xclip -selection c
+
+## notify we're done
+echo read "$IMGURL" into xclip
+notify-send -t 500 "$IMGURL"

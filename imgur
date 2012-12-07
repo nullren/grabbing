@@ -1,6 +1,9 @@
 #!/bin/sh
 
-[ $# -lt 1 ] && exit 1
+if [ "$#" -lt 1 -o ! -f "$1" ]; then
+  echo "usage: $0 <file>" 1>&2
+  exit 1
+fi
 
 THING=$1
 KEY=PUT_YOUR_API_KEY_HERE
@@ -13,7 +16,10 @@ else
   curl -o $OUTPUT -s -d "image=${THING}" -d "key=${KEY}" "${URL}"
 fi
 
-[ $? -ne 0 ] && (echo error && exit 1)
+if [ $? -ne 0 ]; then
+  echo error 1>&2
+  exit 1
+fi
 
 IMGURL=$(perl -nle 'print $1 if /original_image.(http.+?\.png)/' $OUTPUT)
 echo $IMGURL
