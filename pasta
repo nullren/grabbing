@@ -6,20 +6,13 @@ chmod +r "${THING}"
 xclip -o > "${THING}"
 echo -n hold on | xclip
 
-BLAH=$(sha1sum "${THING}" | awk '{ print $1 }')
+PASTEURL=$(scpur "${THING}")
 
-if [ -f $THING ]; then
-    scp "${THING}" "pompom:scrots/${BLAH}.txt"
-fi
-
-# if scp fails, then exit
 if [ $? -ne 0 ]; then
-  echo error
+  notify-send -t 500 "error uploading with scpur"
   echo -n error | xclip
   exit 1
 fi
-
-PASTEURL="http://omgren.com/s/${BLAH}.txt"
 
 # make sure this gets into xclip and the clipboard
 echo -n $PASTEURL | xclip
