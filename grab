@@ -1,14 +1,15 @@
 #!/bin/sh
 
-GRABDIR=/tmp
 UPLOADSCRIPT=imgscp
 
-COUNT=$(ls "${GRABDIR}"/screengrab-*.png 2>/dev/null | wc -l)
-ID=$(echo $COUNT+1 | bc)
+## make temp file
+THING=$(mktemp --suffix=.png)
+chmod +r "${THING}"
 
-scrot -s "${GRABDIR}/screengrab-${ID}.png"
-
-#[ $# -lt 1 ] && exit 0
+## take screen shot
+scrot -s "${THING}"
 
 echo -n "hold on " | xclip
-$UPLOADSCRIPT "${GRABDIR}/screengrab-${ID}.png" 
+
+## upload screen shot
+$UPLOADSCRIPT "${THING}"
