@@ -7,18 +7,23 @@ fi
 
 ## take a file and get its sha1 to use as the file name on the remote machine. 
 THING="$1"
-BLAH=$(sha1sum "${THING}" | awk '{ print $1 }')
+RNAME=$(sha1sum "${THING}" | awk '{ print $1 }')
 
-## clever trick? this could be better
-SUFFIX=$(grep $(file -ib "${THING}" | cut -d\; -f1) /etc/mime.types | awk '{print $2}')
+## uses mtsuf script to guess suffix of file
+SUFFIX=$(mtsuf "${THING}")
+
+if [ "X${SUFFIX}" != "X" ]; then
+  RNAME="${RNAME}.${SUFFIX}"
+fi
 
 ## add your options and such here
-scp "${THING}" pompom:"scrots/${BLAH}.${SUFFIX}"
+scp "${THING}" pompom:"scrots/${RNAME}"
 
 if [ $? -ne 0 ]; then
   echo error 1>&2
   exit 1
 fi
 
-IMGURL="http://omgren.com/s/${BLAH}.png"
+## change this to reflect your url and such
+IMGURL="http://omgren.com/s/${RNAME}"
 echo $IMGURL

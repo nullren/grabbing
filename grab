@@ -3,11 +3,16 @@
 UPLOADSCRIPT=scpur
 
 ## make temp file
-THING=$(mktemp)
+THING=$(mktemp --suffix=.png)
 chmod +r "${THING}"
 
 ## take screen shot
 scrot -s "${THING}"
+
+if [ $? -ne 0 ]; then
+  notify-send -t 500 "error taking screenshot"
+  exit 1
+fi
 
 echo -n "hold on " | xclip
 
@@ -15,7 +20,6 @@ echo -n "hold on " | xclip
 IMGURL=$($UPLOADSCRIPT "${THING}")
 
 if [ $? -ne 0 ]; then
-  echo error uploading to $UPLOADSCRIPT 1>&2
   notify-send -t 500 "error uploading to $UPLOADSCRIPT"
   exit 1
 fi
