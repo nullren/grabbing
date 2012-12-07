@@ -1,14 +1,11 @@
 #!/bin/sh
 
-GRABDIR=/tmp
-COUNT=$(ls "${GRABDIR}"/paste-*.txt 2>/dev/null | wc -l)
-ID=$((COUNT+1))
+THING=$(mktemp)
+chmod +r "${THING}"
 
-xclip -o > "${GRABDIR}/paste-${ID}.txt"
-
+xclip -o > "${THING}"
 echo -n hold on | xclip
 
-THING="${GRABDIR}/paste-${ID}.txt"
 BLAH=$(sha1sum "${THING}" | awk '{ print $1 }')
 
 if [ -f $THING ]; then
@@ -16,7 +13,11 @@ if [ -f $THING ]; then
 fi
 
 # if scp fails, then exit
-[ $? -ne 0 ] && (echo error && exit 1)
+if [ $? -ne 0 ]; then
+  echo error
+  echo -n error | xclip
+  exit 1
+fi
 
 PASTEURL="http://omgren.com/s/${BLAH}.txt"
 
