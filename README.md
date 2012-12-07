@@ -1,10 +1,8 @@
-grabbing
-========
+# grabbing
 
 for groping text files and images. two main scripts are `grab` and
 `pasta`.
 
-------------------------------------------------------------------------
 ## main scripts
 
 ### grab
