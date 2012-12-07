@@ -7,24 +7,13 @@ KEY=PUT_YOUR_API_KEY_HERE
 URL=http://imgur.com/api/upload.xml
 OUTPUT=/tmp/imgur.xml
 
-if [ -f $THING ]
-  then
-    curl -o $OUTPUT -s -F "image=@${THING}" -F "key=${KEY}" "${URL}"
-    
+if [ -f $THING ]; then
+  curl -o $OUTPUT -s -F "image=@${THING}" -F "key=${KEY}" "${URL}"
 else
-    curl -o $OUTPUT -s -d "image=${THING}" -d "key=${KEY}" "${URL}"
+  curl -o $OUTPUT -s -d "image=${THING}" -d "key=${KEY}" "${URL}"
 fi
 
 [ $? -ne 0 ] && (echo error && exit 1)
 
 IMGURL=$(perl -nle 'print $1 if /original_image.(http.+?\.png)/' $OUTPUT)
-
-#echo -n $IMGURL | xclip
-#echo -n $IMGURL | xclip -selection c
-#echo read $IMGURL into xclip
-#notify-send -t 500 "$IMGURL"
-#browser "$IMGURL"
-
-#echo $IMGURL
-
-cat $OUTPUT
+echo $IMGURL
