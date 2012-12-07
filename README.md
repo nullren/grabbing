@@ -15,8 +15,7 @@ webserver accessible by ssh to store your screenshots. it takes the
 image created and uploads it with the specified script and puts the
 resulting url into your clipboard.
 
-usage:
-    grab
+usage: `grab`
 
 ### pasta
 
@@ -25,6 +24,8 @@ relies on `xclip` to take the contents of selected text, then puts it
 into a text file which gets uploaded to your webserver. it puts the
 resulting url into your clipboard.
 
+usage: `pasta`
+
 ## helper scripts
 
 ### imgur
@@ -32,8 +33,7 @@ resulting url into your clipboard.
 you need to get your own imgur api key or else the script won't work.
 see the contents of this script for information.
 
-usage:
-    imgur <filename or url>
+usage: `imgur <filename or url>`
 
 ### scpur
 
@@ -43,8 +43,7 @@ you a url for the file uploaded.
 
 has an optional argument to specify file suffix on remote server.
 
-usage:
-    scpur <filename> [suffix]
+usage: `scpur <filename> [suffix]`
 
 ### mtsuf
 
@@ -54,5 +53,4 @@ it achieves this by using `file -i $FILE` and searches
 
 `scpur` relies on this script to give it a suffix on the remote machine.
 
-usage:
-    mtsuf <filename>
+usage: `mtsuf <filename>`
