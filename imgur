@@ -11,7 +11,7 @@ if [ "$#" -lt 1 ]; then
 fi
 
 ## either a path to file or url to image
-THING=$1
+THING="$1"
 
 URL=http://api.imgur.com/2/upload.xml
 OUTPUT=/tmp/imgur.xml
@@ -31,5 +31,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+## if this turns up empty, there is likely an error
 IMGURL=$(perl -nle 'print $1 if /original>(http.+?\.png)/' $OUTPUT)
+
+if [ "X${IMGURL}" = "X" ]; then
+  echo error 1>&2
+  exit 1
+fi
+
 echo $IMGURL
