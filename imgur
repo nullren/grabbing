@@ -1,24 +1,25 @@
 #!/bin/sh
 
-## imgur anonymous api key infomration available
-## here: http://api.imgur.com/resources_anon#upload
+## register for your own anonymous api key here:
+## <https://imgur.com/register/api_anon>
 
 KEY=PUT_YOUR_API_KEY_HERE
+
+## now you're a good person, use the script as follows
 
 if [ "$#" -lt 1 ]; then
   echo "usage: $0 <file or image url>" 1>&2
   exit 1
 fi
 
-## either a path to file or url to image
 THING="$1"
-
-URL=http://api.imgur.com/2/upload.xml
-OUTPUT=/tmp/imgur.xml
 
 ## if $THING is a path to a file, then upload the file
 ## or else assume $THING is a url and have imgur sideload
 ## that url
+
+URL=http://api.imgur.com/2/upload.xml
+OUTPUT=/tmp/imgur.xml
 
 if [ -f $THING ]; then
   curl -o $OUTPUT -s -F "image=@${THING}" -F "key=${KEY}" "${URL}"
@@ -27,7 +28,7 @@ else
 fi
 
 if [ $? -ne 0 ]; then
-  echo error 1>&2
+  echo error with curl 1>&2
   exit 1
 fi
 
@@ -35,7 +36,7 @@ fi
 IMGURL=$(perl -nle 'print $1 if /original>(http.+?\.png)/' $OUTPUT)
 
 if [ "X${IMGURL}" = "X" ]; then
-  echo error 1>&2
+  echo error with imgur 1>&2
   exit 1
 fi
 
