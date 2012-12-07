@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [ "$#" -lt 1 -o ! -f "$1" ]; then
-  echo "usage: $0 <file>" 1>&2
+  echo "usage: $0 <file> [suffix]" 1>&2
   exit 1
 fi
 
@@ -9,8 +9,13 @@ fi
 THING="$1"
 RNAME=$(sha1sum "${THING}" | awk '{ print $1 }')
 
+## let user specify a suffix, if not, then
 ## uses mtsuf script to guess suffix of file
-SUFFIX=$(mtsuf "${THING}")
+if [ "X${2}" = "X" ]; then
+  SUFFIX=$(mtsuf "${THING}")
+else
+  SUFFIX="${2}"
+fi
 
 if [ "X${SUFFIX}" != "X" ]; then
   RNAME="${RNAME}.${SUFFIX}"
