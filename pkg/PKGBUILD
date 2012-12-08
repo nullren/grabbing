@@ -2,13 +2,14 @@
 
 pkgname=grabbing
 pkgver=20121207
-pkgrel=1
+pkgrel=2
 pkgdesc='for groping text files and images and uploading them to share'
 arch=('i686' 'x86_64' 'armv7h')
 url='https://github.com/nullren/grabbing'
 license=('IDGAF')
 depends=('scrot' 'coreutils' 'libnotify' 'xclip' 'curl' 'openssh' 'file' 'mime-types' 'bash')
 makedepends=('git')
+install=grabbing.install
 source=()
 
 _gitroot="git://github.com/nullren/grabbing.git"
