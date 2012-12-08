@@ -3,6 +3,28 @@
 for groping text files and images. two main scripts are `grab` and
 `pasta`.
 
+## installation
+
+copy the scripts inside `scripts` somewhere in your `$PATH`.
+
+## configuration
+
+copy the contents of `config` into your `$XDG_CONFIG_HOME`, this should
+give you the file `$XDG_CONFIG_HOME/grabbing/config`. without it
+properly configured, you will not be able to use these scripts.
+
+an example is already provided inside `config/grabbing/config`.
+
+### options
+
+* `UPLOADSCRIPT` : specifies whether to use `imgur` or `scpur` to upload
+  screenshots in `grab`
+* `IMGURKEY` : your imgur api key
+* `SCPOPTS` : options to pass to `scp`
+* `SSHSTR` : *user@server*
+* `SSHDIR` : directory on remote server to put your file
+* `WEBURL` : web accessible url for that file
+
 ## main scripts
 
 ### grab
@@ -10,7 +32,7 @@ for groping text files and images. two main scripts are `grab` and
 this script relies on the presence of `scrot` to take a screen shot.
 simply just call the script `grab` -- it behaves the same as `scrot -s`.
 
-inside `grab`, you can specify whether to use imgur or a remote
+inside the config file, you can specify whether to use imgur or a remote
 webserver accessible by ssh to store your screenshots. it takes the
 image created and uploads it with the specified script and puts the
 resulting url into your clipboard.
@@ -31,7 +53,7 @@ usage: `pasta`
 ### imgur
 
 you need to get your own imgur api key or else the script won't work.
-see the contents of this script for information.
+see the config file for information to obtain a key.
 
 usage: `imgur <filename or url>`
 

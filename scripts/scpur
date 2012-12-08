@@ -1,5 +1,13 @@
 #!/bin/sh
 
+## load options
+if [ ! -f "$XDG_CONFIG_HOME/grabbing/config" ]; then
+  echo "please set up config file \"$XDG_CONFIG_HOME/grabbing/config\"" 1>&2
+  exit 2
+fi
+
+source $XDG_CONFIG_HOME/grabbing/config
+
 if [ "$#" -lt 1 -o ! -f "$1" ]; then
   echo "usage: $0 <file> [suffix]" 1>&2
   exit 1
@@ -21,14 +29,14 @@ if [ "X${SUFFIX}" != "X" ]; then
   RNAME="${RNAME}.${SUFFIX}"
 fi
 
-## add your options and such here
-scp "${THING}" pompom:"scrots/${RNAME}"
+## add your options and such in the config file
+scp ${SCPOPTS} "${THING}" "${SSHSTR}":"${SSHDIR}/${RNAME}"
 
 if [ $? -ne 0 ]; then
   echo error 1>&2
   exit 1
 fi
 
-## change this to reflect your url and such
-IMGURL="http://omgren.com/s/${RNAME}"
+## change this to reflect your url and such in the config file
+IMGURL="${WEBURL}/${RNAME}"
 echo $IMGURL

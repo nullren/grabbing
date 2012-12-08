@@ -1,7 +1,11 @@
 #!/bin/sh
 
-## can use scpur or imgur
-UPLOADSCRIPT=scpur
+## load options
+if [ ! -f "$XDG_CONFIG_HOME/grabbing/config" ]; then
+  echo "please set up config file \"$XDG_CONFIG_HOME/grabbing/config\"" 1>&2
+  exit 2
+fi
+source $XDG_CONFIG_HOME/grabbing/config
 
 ## make temp file
 THING=$(mktemp --suffix=.png)
