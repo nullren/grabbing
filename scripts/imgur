@@ -22,9 +22,9 @@ URL=http://api.imgur.com/2/upload.xml
 OUTPUT=/tmp/imgur.xml
 
 if [ -f $THING ]; then
-  curl -o $OUTPUT -s -F "image=@${THING}" -F "key=${KEY}" "${URL}"
+  curl -o $OUTPUT -s -F "image=@${THING}" -F "key=${IMGURKEY}" "${URL}"
 else
-  curl -o $OUTPUT -s -d "image=${THING}" -d "key=${KEY}" "${URL}"
+  curl -o $OUTPUT -s -d "image=${THING}" -d "key=${IMGURKEY}" "${URL}"
 fi
 
 if [ $? -ne 0 ]; then
