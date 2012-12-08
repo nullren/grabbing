@@ -1,0 +1,40 @@
+# grabbing configuration file - this file must be placed in
+# `$XDG_CONFIG_HOME/grabbing/grabbing`. `$XDG_CONFIG_HOME` is usually
+# `~/.config`.
+
+
+# `grab`
+#
+# upload script to use: `imgur`, `scpur`
+
+UPLOADSCRIPT="scpur"
+
+
+# `imgur`
+#
+# if specified imgur above, you must have an imgur anonymous api key
+# one can be obtained at <https://imgur.com/register/api_anon>
+
+IMGURKEY="PUT_YOUR_API_KEY_HERE"
+
+
+# `scpur`
+#
+# this script uses scp to transfer a file to a web accessable directory
+# on a remote machine. options specified here are used directly with
+# `scp`.
+#
+# if on your remote server, the directory `/srv/http/files/` corresponds
+# to the web address <http://server/files/>, then set the following
+# options to correspond to any scp command you would use to copy files
+# to `/srv/http/files/`. eg:
+#
+#    scp -P 42222 dog.jpg user@server:/srv/http/files/
+#
+# making `dog.jpg` accessible at <http://server/files/dog.jpg>, then your
+# options would be set as follows:
+
+SCPOPTS="-P 42222"
+SSHSTR="user@server"
+SSHDIR="/srv/http/"
+WEBURL="http://server/"
