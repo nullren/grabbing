@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ "x$XDG_CONFIG_HOME" = "x" ]; then
+  XDG_CONFIG_HOME="$HOME/.config"
+fi
+
 ## load options
 if [ ! -f "$XDG_CONFIG_HOME/grabbing/config" ]; then
   echo "please set up config file \"$XDG_CONFIG_HOME/grabbing/config\"" 1>&2
