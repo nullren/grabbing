@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 THING=$(mktemp --suffix=.txt)
 chmod +r "${THING}"

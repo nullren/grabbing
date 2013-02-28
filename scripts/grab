@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "x$XDG_CONFIG_HOME" = "x" ]; then
   XDG_CONFIG_HOME="$HOME/.config"
