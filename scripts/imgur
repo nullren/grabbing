@@ -37,7 +37,7 @@ if [ $? -ne 0 ]; then
 fi
 
 ## if this turns up empty, there is likely an error
-IMGURL=$(perl -nle 'print $1 if /original>(http.+?\.png)/' $OUTPUT)
+IMGURL=$(perl -nle 'print $1 if /original>(http[^<]+)/' $OUTPUT)
 
 if [ "X${IMGURL}" = "X" ]; then
   echo error with imgur 1>&2
