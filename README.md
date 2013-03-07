@@ -15,10 +15,14 @@ properly configured, you will not be able to use these scripts.
 
 an example is already provided inside `config/grabbing/config`.
 
+if `$XDG_CONFIG_HOME` is not defined, put the file in ~/.config, so you have:
+  `~/.config/grabbing/config`
+
 ### options
 
 * `UPLOADSCRIPT` : specifies whether to use `imgur` or `scpur` to upload
   screenshots in `grab`
+* `FORMAT` : specifies whether to use timestamp or sha1 for uploaded filename
 * `IMGURKEY` : your imgur api key
 * `SCPOPTS` : options to pass to `scp`
 * `SSHSTR` : *user@server*
