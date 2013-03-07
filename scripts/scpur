@@ -19,11 +19,16 @@ fi
 
 THING="$1"
 
+# set default format
+if [ "x${FORMAT}" = "x" ]; then
+  FORMAT="sha1sum"
+fi
+
 # Either use sha1 or timestamp as filename on remote machine, depending on config
-if [ "${FORMAT}" == "time" ]; then
+if [ "${FORMAT}" = "time" ]; then
   STAMP="$(date +"%Y-%m-%d_%H-%M-%S")"
   RNAME=${STAMP}
-elif [ "${FORMAT}" == "sha1sum" ]; then
+elif [ "${FORMAT}" = "sha1sum" ]; then
   RNAME=$(sha1sum "${THING}" | awk '{ print $1 }')
 else
   echo "No valid name format specified, please fix config file."
