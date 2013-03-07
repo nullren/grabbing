@@ -17,9 +17,18 @@ if [ "$#" -lt 1 -o ! -f "$1" ]; then
   exit 1
 fi
 
-## take a file and get its sha1 to use as the file name on the remote machine. 
 THING="$1"
-RNAME=$(sha1sum "${THING}" | awk '{ print $1 }')
+
+# Either use sha1 or timestamp as filename on remote machine, depending on config
+if [ "${FORMAT}" == "time" ]; then
+  STAMP="$(date +"%Y-%m-%d_%H-%M-%S")"
+  RNAME=${STAMP}
+elif [ "${FORMAT}" == "sha1sum" ]; then
+  RNAME=$(sha1sum "${THING}" | awk '{ print $1 }')
+else
+  echo "No valid name format specified, please fix config file."
+  exit 3
+fi
 
 ## let user specify a suffix, if not, then
 ## uses mtsuf script to guess suffix of file
