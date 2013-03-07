@@ -9,6 +9,8 @@
 
 UPLOADSCRIPT="scpur"
 
+# format for uploaded filename to use: `time`, `sha1sum`
+FORMAT="time"
 
 # `imgur`
 #
