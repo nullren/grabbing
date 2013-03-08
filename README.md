@@ -13,10 +13,10 @@ copy the contents of `config` into your `$XDG_CONFIG_HOME`, this should
 give you the file `$XDG_CONFIG_HOME/grabbing/config`. without it
 properly configured, you will not be able to use these scripts.
 
-an example is already provided inside `config/grabbing/config`.
+by default, `$XDG_CONFIG_HOME` points to `$HOME/.config`. so you
+should copy the config to `$HOME/.config/grabbing/config`.
 
-if `$XDG_CONFIG_HOME` is not defined, put the file in ~/.config, so you have:
-  `~/.config/grabbing/config`
+an example is already provided inside `config/grabbing/config`.
 
 ### options
 
