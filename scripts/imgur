@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "x$XDG_CONFIG_HOME" = "x" ]; then
+if [ -z "$XDG_CONFIG_HOME" ]; then
   XDG_CONFIG_HOME="$HOME/.config"
 fi
 
@@ -39,7 +39,7 @@ fi
 ## if this turns up empty, there is likely an error
 IMGURL=$(perl -nle 'print $1 if /original>(http[^<]+)/' $OUTPUT)
 
-if [ "X${IMGURL}" = "X" ]; then
+if [ -z "${IMGURL}" ]; then
   echo error with imgur 1>&2
   exit 1
 fi

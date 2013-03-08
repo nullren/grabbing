@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "x$XDG_CONFIG_HOME" = "x" ]; then
+if [ -z "$XDG_CONFIG_HOME" ]; then
   XDG_CONFIG_HOME="$HOME/.config"
 fi
 
@@ -20,7 +20,7 @@ fi
 THING="$1"
 
 # set default format
-if [ "x${FORMAT}" = "x" ]; then
+if [ -z "$FORMAT" ]; then
   FORMAT="sha1sum"
 fi
 
@@ -37,13 +37,13 @@ fi
 
 ## let user specify a suffix, if not, then
 ## uses mtsuf script to guess suffix of file
-if [ "X${2}" = "X" ]; then
+if [ -z "${2}" ]; then
   SUFFIX=$(mtsuf "${THING}")
 else
   SUFFIX="${2}"
 fi
 
-if [ "X${SUFFIX}" != "X" ]; then
+if [ -n "${SUFFIX}" ]; then
   RNAME="${RNAME}.${SUFFIX}"
 fi
 
