@@ -12,6 +12,9 @@ UPLOADSCRIPT="scpur"
 # format for uploaded filename to use: `time`, `sha1sum`
 FORMAT="time"
 
+# put text files into their own directory: `true` or `false`
+TXTDIRECTORY="false"
+
 # `imgur`
 #
 # if specified imgur above, you must have an imgur anonymous api key
@@ -40,3 +43,7 @@ SCPOPTS="-P 42222"
 SSHSTR="user@server"
 SSHDIR="/srv/http/"
 WEBURL="http://server/"
+
+# if TXTDIRECTORY="false", these do not need to be configured
+SSHDIRTXT="/srv/http/textfiles/"
+WEBURLTXT="http://server/textfiles"
