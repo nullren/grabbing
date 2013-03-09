@@ -17,23 +17,9 @@ if [ "$#" -lt 1 -o ! -f "$1" ]; then
   exit 1
 fi
 
+## take a file and get its sha1 to use as the file name on the remote machine. 
 THING="$1"
-
-# set default format
-if [ -z "$FORMAT" ]; then
-  FORMAT="sha1sum"
-fi
-
-# Either use sha1 or timestamp as filename on remote machine, depending on config
-if [ "${FORMAT}" = "time" ]; then
-  STAMP="$(date +"%Y-%m-%d_%H-%M-%S")"
-  RNAME=${STAMP}
-elif [ "${FORMAT}" = "sha1sum" ]; then
-  RNAME=$(sha1sum "${THING}" | awk '{ print $1 }')
-else
-  echo "No valid name format specified, please fix config file."
-  exit 3
-fi
+RNAME=$(sha1sum "${THING}" | awk '{ print $1 }')
 
 ## let user specify a suffix, if not, then
 ## uses mtsuf script to guess suffix of file
@@ -48,12 +34,7 @@ if [ -n "${SUFFIX}" ]; then
 fi
 
 ## add your options and such in the config file
-if [ "${TXTDIRECTORY}" = "false" ] || [ "${SUFFIX}" != "txt" ]; then
-  scp ${SCPOPTS} "${THING}" "${SSHSTR}":"${SSHDIR}/${RNAME}"
-elif [ "${TXTDIRECTORY}" = "true" ] && [ "${SUFFIX}" = "txt" ]; then
-  scp ${SCPOPTS} "${THING}" "${SSHSTR}":"${SSHDIRTXT}/$RNAME"
-  USEDTXTDIR="true"
-fi
+scp ${SCPOPTS} "${THING}" "${SSHSTR}":"${SSHDIR}/${RNAME}"
 
 if [ $? -ne 0 ]; then
   echo error 1>&2
@@ -61,10 +42,5 @@ if [ $? -ne 0 ]; then
 fi
 
 ## change this to reflect your url and such in the config file
-if [ "${USEDTXTDIR}" = "true" ]; then
-  IMGURL="${WEBURLTXT}/${RNAME}"
-else
-  IMGURL="${WEBURL}/${RNAME}"
-fi
-
+IMGURL="${WEBURL}/${RNAME}"
 echo $IMGURL

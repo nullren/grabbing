@@ -22,15 +22,11 @@ an example is already provided inside `config/grabbing/config`.
 
 * `UPLOADSCRIPT` : specifies whether to use `imgur` or `scpur` to upload
   screenshots in `grab`
-* `FORMAT` : specifies whether to use timestamp or sha1 for uploaded filename
-* `TXTDIRECTORY` : specifies whether to use a separate directory for uploading txt files
 * `IMGURKEY` : your imgur api key
 * `SCPOPTS` : options to pass to `scp`
 * `SSHSTR` : *user@server*
 * `SSHDIR` : directory on remote server to put your file
 * `WEBURL` : web accessible url for that file
-* `SSHDIRTXT` : directory on remote server to put txt files, if enabled
-* `WEBURLTXT` : web accessible url for txt files, if enabled
 
 ## main scripts
 
