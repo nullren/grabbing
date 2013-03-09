@@ -67,6 +67,6 @@ if [ $? -ne 0 ]; then
 fi
 
 ## change this to reflect your url and such in the config file
-  IMGURL="${WEBURL}/${RNAME}"
+IMGURL="${WEBURL}/${RNAME}"
 
 echo $IMGURL
