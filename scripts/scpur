@@ -47,13 +47,19 @@ if [ -n "${SUFFIX}" ]; then
   RNAME="${RNAME}.${SUFFIX}"
 fi
 
-## add your options and such in the config file
-if [ "${TXTDIRECTORY}" = "false" ] || [ "${SUFFIX}" != "txt" ]; then
-  scp ${SCPOPTS} "${THING}" "${SSHSTR}":"${SSHDIR}/${RNAME}"
-elif [ "${TXTDIRECTORY}" = "true" ] && [ "${SUFFIX}" = "txt" ]; then
-  scp ${SCPOPTS} "${THING}" "${SSHSTR}":"${SSHDIRTXT}/$RNAME"
-  USEDTXTDIR="true"
+# if extensions array isn't empty, check it to see if we should use distinct directory
+if [ ${#EXTENSIONS[@]} != 0 ]; then
+  for (( i=0; i < ${#EXTENSIONS[@]}; i+=3 )) do
+    if [ "${EXTENSIONS[$i]}" = "${SUFFIX}" ]; then
+      SSHDIR="${EXTENSIONS[$i+1]}"
+      WEBURL="${EXTENSIONS[$i+2]}"
+      break
+    fi
+  done  
 fi
+
+### UPLOAD
+scp ${SCPOPTS} "${THING}" "${SSHSTR}":"${SSHDIR}/${RNAME}"
 
 if [ $? -ne 0 ]; then
   echo error 1>&2
@@ -61,10 +67,6 @@ if [ $? -ne 0 ]; then
 fi
 
 ## change this to reflect your url and such in the config file
-if [ "${USEDTXTDIR}" = "true" ]; then
-  IMGURL="${WEBURLTXT}/${RNAME}"
-else
   IMGURL="${WEBURL}/${RNAME}"
-fi
 
 echo $IMGURL
