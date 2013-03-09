@@ -12,9 +12,6 @@ UPLOADSCRIPT="scpur"
 # format for uploaded filename to use: `time`, `sha1sum`
 FORMAT="time"
 
-# put text files into their own directory: `true` or `false`
-TXTDIRECTORY="false"
-
 # `imgur`
 #
 # if specified imgur above, you must have an imgur anonymous api key
@@ -44,6 +41,13 @@ SSHSTR="user@server"
 SSHDIR="/srv/http/"
 WEBURL="http://server/"
 
-# if TXTDIRECTORY="false", these do not need to be configured
-SSHDIRTXT="/srv/http/textfiles/"
-WEBURLTXT="http://server/textfiles"
+# OPTIONAL - put files with certain extensions into distinct directories
+# For each extension you should have 3 consecutive entries:
+# The extension, the path on the server to put the file, and the weburl where that path is found
+# If configured, must be in valid bash array format, as shown below:
+# If not configured or when dealing with an extension not specified here,
+# the above settings will be used
+
+EXTENSIONS=( \
+'exten' '/srv/http/exten' 'http://server/exten' \
+)
